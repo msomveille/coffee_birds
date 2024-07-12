@@ -1,0 +1,49 @@
+site,year,height,lai
+forest,2022,"understory
+(0-5)",2.142532565
+shade coffee,2022,"understory
+(0-5)",1.682244783
+sun coffee,2022,"understory
+(0-5)",0.672837756
+forest,2022,"mid height
+(5-10)",0.412686104
+shade coffee,2022,"mid height
+(5-10)",0.841792852
+sun coffee,2022,"mid height
+(5-10)",0.139447442
+forest,2022,"canopy
+(10-20)",0.062688767
+shade coffee,2022,"canopy
+(10-20)",0.340479353
+sun coffee,2022,"canopy
+(10-20)",0.002784882
+forest,2022,"high canopy
+(20+)",0.000254354
+shade coffee,2022,"high canopy
+(20+)",5.27825649963826e-07
+sun coffee,2022,"high canopy
+(20+)",0
+forest,2023,"understory
+(0-5)",2.170161085
+shade coffee,2023,"understory
+(0-5)",1.662179194
+sun coffee,2023,"understory
+(0-5)",1.740799492
+forest,2023,"mid height
+(5-10)",0.524560056
+shade coffee,2023,"mid height
+(5-10)",0.981725171
+sun coffee,2023,"mid height
+(5-10)",0.33042355
+forest,2023,"canopy
+(10-20)",0.098226489
+shade coffee,2023,"canopy
+(10-20)",0.462580853
+sun coffee,2023,"canopy
+(10-20)",0.004104647
+forest,2023,"high canopy
+(20+)",0.000426633
+shade coffee,2023,"high canopy
+(20+)",0.000805232
+sun coffee,2023,"high canopy
+(20+)",2.1980330251627e-05
