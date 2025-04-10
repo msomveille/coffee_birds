@@ -311,21 +311,8 @@ spp_list_all <- unique(c(spp_list_bosque, spp_list_interior, spp_list_hamburgo))
 #write.csv(spp_list_all, "resources/species_list2.csv")
 
 
-## Put species functional trait data together ##
-
-spp_data <- data.frame(Species = spp_list_all)
-#spp_data <- read_csv("resources/species_list2.csv")[,-1] %>%
-#  rename(Species = x)
-# Get foraging strata data
-foraging_strata <- read_csv("resources/foraging_strata.csv")
-# Get trait data from AVONET
-ebird.taxonomy <- read_csv("resources/eBird_Taxonomy_v2019.csv")
-spp_data$sci_name <- ebird.taxonomy$SCI_NAME[match(spp_data$Species, ebird.taxonomy$PRIMARY_COM_NAME)]
-avonet.data <- read_csv("resources/AVONET2_ebird.csv") %>%
-  filter(Species2 %in% spp_data$sci_name) %>%
-  rename(sci_name = Species2)
-spp_data <- spp_data %>% left_join(avonet.data) %>% left_join(foraging_strata)
-
+## Load species functional trait data  ##
+spp_data <- read_csv("species_traits_data.csv")
 
 ## Figure 4: species temporal ranges
 
