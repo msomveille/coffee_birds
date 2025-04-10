@@ -14,7 +14,7 @@ library(ggspatial)
 
 # Load detection data
 
-bosque <- read_csv("resources/Buggs/Detections/Bugg_detections_Bosque_fullyear.csv") %>%
+bosque <- read_csv("Bugg_detections_Bosque_fullyear.csv") %>%
   subset(Confidence > 0.8) %>%
   mutate(File = as_datetime(Date) - hours(6)) %>%
   mutate(Date = as_datetime(Date) - hours(6) + seconds(Begin.Time..s.)) %>%
@@ -28,7 +28,7 @@ bosque <- read_csv("resources/Buggs/Detections/Bugg_detections_Bosque_fullyear.c
   mutate(jday = yday(as.Date(Date))) %>%
   select(site, File, Date, jday, Hour, Min, Sec, Species.Code, Common.Name, Confidence)
 
-interior <- read_csv("resources/Buggs/Detections/Bugg_detections_IrlandaInterior_fullyear.csv") %>%
+interior <- read_csv("Bugg_detections_IrlandaInterior_fullyear.csv") %>%
   subset(Confidence > 0.8) %>%
   mutate(File = as_datetime(Date) - hours(6)) %>%
   mutate(Date = as_datetime(Date) - hours(6) + seconds(Begin.Time..s.)) %>%
@@ -42,7 +42,7 @@ interior <- read_csv("resources/Buggs/Detections/Bugg_detections_IrlandaInterior
   mutate(jday = yday(as.Date(Date))) %>%
   select(site, File, Date, jday, Hour, Min, Sec, Species.Code, Common.Name, Confidence)
 
-hamburgo <- read_csv("resources/Buggs/Detections/Bugg_detections_Hamburgo_fullyear.csv") %>%
+hamburgo <- read_csv("Bugg_detections_Hamburgo_fullyear.csv") %>%
   subset(Confidence > 0.8) %>%
   mutate(File = as_datetime(Date) - hours(6)) %>%
   mutate(Date = as_datetime(Date) - hours(6) + seconds(Begin.Time..s.)) %>%
@@ -59,7 +59,7 @@ hamburgo <- read_csv("resources/Buggs/Detections/Bugg_detections_Hamburgo_fullye
 
 # BirdNET calibration
 
-validation_data <- read_csv("resources/Buggs/Validation/Checking_Chiapas_detections.csv")
+validation_data <- read_csv("Checking_Chiapas_detections.csv")
 validation_species <- unique(validation_data$Species)
 
 validation_data_spp <- vector()
@@ -87,21 +87,21 @@ nrow(bosque) + nrow(interior) + nrow(hamburgo) # 123355
 # Estimate sampling effort
 
 ## Load audio data
-bosque_audio <- read_csv("resources/Buggs/Detections/file_dates_Bosque_fullyear.csv") %>%
+bosque_audio <- read_csv("file_dates_Bosque_fullyear.csv") %>%
   rename(Date = x) %>% mutate(Date = as_datetime(Date) - hours(6)) %>% separate(Date, into = c("Day", "Time"), sep = " ", remove=F) %>%
   separate(Time, into = c("Hour", "Min", "Sec"), sep = ":", remove=F) %>%
   dplyr::mutate(Hour = as.numeric(Hour)) %>% 
   mutate(site = "bosque") %>%
   filter(Day > "2022-02-20" & Day <= "2023-02-20") %>%
   mutate(jday = yday(as.Date(Day)))
-interior_audio <- read_csv("resources/Buggs/Detections/file_dates_IrlandaInterior_fullyear.csv") %>%
+interior_audio <- read_csv("file_dates_IrlandaInterior_fullyear.csv") %>%
   rename(Date = x) %>% mutate(Date = as_datetime(Date) - hours(6)) %>% separate(Date, into = c("Day", "Time"), sep = " ", remove=F) %>%
   separate(Time, into = c("Hour", "Min", "Sec"), sep = ":", remove=F) %>%
   dplyr::mutate(Hour = as.numeric(Hour)) %>% 
   mutate(site = "interior") %>%
   filter(Day > "2022-02-20" & Day <= "2023-02-20") %>%
   mutate(jday = yday(as.Date(Day)))
-hamburgo_audio <- read_csv("resources/Buggs/Detections/file_dates_Hamburgo_fullyear.csv") %>%
+hamburgo_audio <- read_csv("file_dates_Hamburgo_fullyear.csv") %>%
   rename(Date = x) %>% mutate(Date = as_datetime(Date) - hours(6)) %>% separate(Date, into = c("Day", "Time"), sep = " ", remove=F) %>%
   separate(Time, into = c("Hour", "Min", "Sec"), sep = ":", remove=F) %>%
   dplyr::mutate(Hour = as.numeric(Hour)) %>% 
@@ -182,7 +182,7 @@ g_det_rate <- ggplot(data=data_for_plot) +
   xlab("") + ylab("Detection rate (detections per minute)") + theme_light() + ggtitle("(c)") +
   theme(legend.title = element_text(size=13), legend.text = element_text(size=12))
 
-pdf(file = "results/Figures/Figure_3.pdf", width = 6, height = 10)
+pdf(file = "Figure_3.pdf", width = 6, height = 10)
 ggarrange(g_audio, g_det, g_det_rate, nrow=3, ncol=1, common.legend = TRUE, legend="bottom")
 dev.off()
 
@@ -575,10 +575,10 @@ g_omn_boxplot <- ggplot(data=functional_signatures_boxplot) +
   theme(legend.position="bottom")
 
 
-png(filename = "results/Figures/Figure_5a.png", width = 400, height = 1200, units = "px", pointsize = 12, bg = "white")
+png(filename = "Figure_5a.png", width = 400, height = 1200, units = "px", pointsize = 12, bg = "white")
 ggarrange(g_forest, g_under, g_strata, g_migr, g_inv, g_omn, nrow=6, ncol=1, legend="bottom", common.legend=T)
 dev.off()
-png(filename = "results/Figures/Figure_5b.png", width = 250, height = 1200, units = "px", pointsize = 12, bg = "white")
+png(filename = "Figure_5b.png", width = 250, height = 1200, units = "px", pointsize = 12, bg = "white")
 ggarrange(g_forest_boxplot, g_under_boxplot, g_strata_boxplot, g_migr_boxplot, g_inv_boxplot, g_omn_boxplot, nrow=6, ncol=1, legend="bottom", common.legend=T)
 dev.off()
 
